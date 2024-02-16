@@ -1,97 +1,72 @@
 package GameEngine;
+import Character.Monster.Monster;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
-public class GameEngine {
-    protected int hp;
-    protected int exp;
-    protected int stamina;
-    protected int attack;
-    protected int damage;
-    protected int defence;
-    protected int luck;
-    protected int value;
-
-    // String variables
-    protected String name;
-    protected String type;
-
-    // Generating getters and setters
-    public int getStamina() {
-        return stamina;
+public class GameEngine extends JPanel implements KeyListener {
+    // movement
+    private int playerX = 50;
+    private int playerY = 50;
+    //Color
+    protected Color playerColor;
+    public GameEngine() {
+        setPreferredSize(new Dimension(400, 400)); // Set the preferred size of the panel
+        addKeyListener(this); // Add the KeyListener to the panel
+        setFocusable(true); // Set focusable to true so the panel can receive key events
     }
 
-    public void setStamina(int stamina) {
-        this.stamina = stamina;
+    protected void movePlayer(int deltaX, int deltaY) {
+        playerX += deltaX;
+        playerY += deltaY;
+        repaint(); // Request a redraw after moving
     }
 
-    public int getLuck() {
-        return luck;
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.setColor(playerColor);
+        g.fillRect(playerX, playerY, 20, 20); // Draw the player square at its current position
     }
 
-    public void setLuck(int luck) {
-        this.luck = luck;
+    @Override
+    public void keyTyped(KeyEvent e) {
+        // Not needed for arrow key movement
     }
 
-    public int getValue() {
-        return value;
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int keyCode = e.getKeyCode();
+        switch (keyCode) {
+            case KeyEvent.VK_UP:
+                movePlayer(0, -10);
+                break;
+            case KeyEvent.VK_DOWN:
+                movePlayer(0, 10);
+                break;
+            case KeyEvent.VK_LEFT:
+                movePlayer(-10, 0);
+                break;
+            case KeyEvent.VK_RIGHT:
+                movePlayer(10, 0);
+                break;
+        }
+    }
+    @Override
+    public void keyReleased(KeyEvent e) {
+        // Not needed for arrow key movement
+    }
+    public static void main(String[] args){
+//        JFrame frame = new JFrame("Game");
+//        GameEngine game = new GameEngine();
+//        frame.add(game);
+//        frame.pack();
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setLocationRelativeTo(null);
+//        frame.setVisible(true);
+//        Monster mon = new Monster();
+//        System.out.print(mon.getType());
+
     }
 
-    public void setValue(int value) {
-        this.value = value;
-    }
-
-    public String getName(){
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public int getHp() {
-        return hp;
-    }
-
-    public void setHp(int hp) {
-        this.hp = hp;
-    }
-
-    public int getExp() {
-        return exp;
-    }
-
-    public void setExp(int exp) {
-        this.exp = exp;
-    }
-
-    public int getAttack() {
-        return attack;
-    }
-
-    public void setAttack(int attack) {
-        this.attack = attack;
-    }
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
-    public int getDefence() {
-        return defence;
-    }
-
-    public void setDefence(int defence) {
-        this.defence = defence;
-    }
 }

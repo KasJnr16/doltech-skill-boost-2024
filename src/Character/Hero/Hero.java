@@ -1,4 +1,4 @@
-package Hero;
+package Character.Hero;
 
 public class Hero {
 
