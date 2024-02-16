@@ -2,10 +2,10 @@ package Character.Monster;
 
 public class Goblin extends Monster {
     public Goblin() {
-
-    }
-
-    public static void main(String[] args){
+        setName("Goblin");
+        setHp(120);
+        setAttack(25);
+        setDefence(40);
 
     }
 

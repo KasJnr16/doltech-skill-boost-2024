@@ -1,5 +1,7 @@
 package Character;
 
+import GameEngine.GameEngine;
+
 public class CharacterProperties {
     private int hp;
     private int exp;
@@ -9,9 +11,13 @@ public class CharacterProperties {
     private int defence;
     private int luck;
     private int value;
+    private int getX;
+    private int getY;
+
     // String variables
     private String name;
     private String type;
+    private String color;
 
     public int getHp() {
         return hp;
@@ -92,4 +98,41 @@ public class CharacterProperties {
     public void setType(String type) {
         this.type = type;
     }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {this.color = color; }
+
+    public int getGetX() {
+        return getX;
+    }
+
+    public void setGetX(int getX) {
+        this.getX = getX;
+    }
+
+    public int getGetY() {
+        return getY;
+    }
+
+    public void setGetY(int getY) {
+        this.getY = getY;
+    }
+
+//    Battling methods
+    public void attack(CharacterProperties target){
+        int damage = this.attack - target.getDefence();
+        target.receiveDamage(damage);
+    }
+
+    private void receiveDamage(int damage) {
+        this.hp -= damage;
+        if(this.hp <= 0){
+            GameEngine.removeCharacter(this);
+
+        }
+    }
+
 }
